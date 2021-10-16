@@ -1,20 +1,50 @@
-apt update && apt upgrade -y
-apt install gpsd gpsd-clients pps-tools ntp -y
+#!/bin/bash
+#########################################################
+# Created by W7SVT Oct 2020 #############################
+# Updated by W7SVT Jun 2021
+#########################################################
+#########################################################
+#  __      ___________  _____________   _______________ #
+# /  \    /  \______  \/   _____/\   \ /   /\__    ___/ #
+# \   \/\/   /   /    /\_____  \  \   Y   /   |    |    #
+#  \        /   /    / /        \  \     /    |    |    #
+#   \__/\  /   /____/ /_______  /   \___/     |____|    #
+#        \/                   \/                        #
+#########################################################
 
+#*******************************************************
+# APT update and upgrade
+#*******************************************************
+apt update && apt upgrade -y
+#*******************************************************
+# APT Install GPS PPS and NTP
+#*******************************************************
+apt install gpsd gpsd-clients pps-tools ntp -y
+#*******************************************************
+# Alter gpsd
+#*******************************************************
 sed -i 's/USBAUTO="true"/USBAUTO="false"/g' /etc/default/gpsd
 sed -i 's:DEVICES="":DEVICES="/dev/serial0 /dev/pps0":g' /etc/default/gpsd
 sed -i 's:GPSD_OPTIONS="":GPSD_OPTIONS="-n":g' /etc/default/gpsd
-
-
+#*******************************************************
+# Enable PPS and config for GPIO 18
+#*******************************************************
 echo dtoverlay=pps-gpio,gpiopin=18 >> /boot/config.txt
 echo pps-gpio >> /etc/modules
-
+#*******************************************************
+# Comment out the internet time sources
+#*******************************************************
 sed -i 's/pool 0./# pool 0./g' /etc/ntp.conf
 sed -i 's/pool 1./# pool 1./g' /etc/ntp.conf
 sed -i 's/pool 2./# pool 2./g' /etc/ntp.conf
 sed -i 's/pool 3./# pool 3./g' /etc/ntp.conf
-
+#*******************************************************
+# Enable services
+#*******************************************************
 systemctl enable gpsd
 systemctl enable ntp
 
-
+#*******************************************************
+# JIC
+#*******************************************************
+telinit q
