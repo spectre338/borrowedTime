@@ -16,9 +16,8 @@ echo "APT update and upgrade"
 #*******************************************************
 #apt update 
 
-sysctl net.ipv4.ip_forward
-sysctl net.ipv4.ip_forward=1
-sed -i '/net.ipv4.ip_forward=1/s/^#//g' /etc/sysctl.conf 
+sudo sysctl net.ipv4.ip_forward && sudo sysctl net.ipv4.ip_forward=1
+sudo sed -i '/net.ipv4.ip_forward=1/s/^#//g' /etc/sysctl.conf 
 
 sudo cat << EOF >> /etc/dhcpcd.conf
 
@@ -26,14 +25,17 @@ sudo cat << EOF >> /etc/dhcpcd.conf
 denyinterfaces wlan0
 EOF
 
+apt-get install -y \
+	uidmap \
+	libffi-dev \
+	libssl-dev \
+	python3 \
+	python3-pip
+
 curl -sSL https://get.docker.com | sh 
-
-
+dockerd-rootless-setuptool.sh install
 
 sudo usermod -aG docker ${USER}
-sudo apt-get install libffi-dev libssl-dev
-sudo apt install python3-dev
-sudo apt-get install -y python3 python3-pip
 
 sudo pip3 install docker-compose
 
