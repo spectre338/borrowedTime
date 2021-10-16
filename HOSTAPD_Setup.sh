@@ -12,6 +12,21 @@
 #########################################################
 
 #*******************************************************
-# APT update and upgrade
+echo "APT update and upgrade"
 #*******************************************************
-apt update && apt upgrade -y
+#apt update 
+
+sysctl net.ipv4.ip_forward
+sysctl net.ipv4.ip_forward=1
+sed -i '/net.ipv4.ip_forward=1/s/^#//g' /etc/sysctl.conf 
+
+sudo cat << EOF >> /etc/dhcpcd.conf
+
+# Setup for portal
+denyinterfaces wlan0
+EOF
+
+curl -sSL https://get.docker.com | sh 
+
+
+
