@@ -49,6 +49,7 @@ sed -i 's/pool 3./# pool 3./g' /etc/ntp.conf
 #*******************************************************
 # Confiure /etc/ntp.conf for SHM2 GPS and PPS
 #*******************************************************
+
 sudo cat << EOF >> /etc/ntp.conf
 #Note that this config works without an internet source.
 pool us.pool.ntp.org iburst noselect
