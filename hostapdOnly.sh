@@ -7,7 +7,6 @@ sudo cp hostapd.conf /etc/hostapd/hostapd.conf
 
 sudo sed -i 's*#DAEMON_CONF=""*DAEMON_CONF="/etc/hostapd/hostapd.conf"*g'  /etc/default/hostapd 
 
-
 sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
 
@@ -18,6 +17,9 @@ bind-dynamic
 domain-needed
 bogus-priv
 dhcp-range=172.16.0.150,172.16.0.200,255.255.255.0,12h
+dhcp-authoritative
+log-queries
+
 " | sudo tee -a /etc/dnsmasq.conf
 
 echo "
