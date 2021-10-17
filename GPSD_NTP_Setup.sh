@@ -64,7 +64,7 @@ fudge 127.127.22.0 flag3 1 refid PPS
 
 # GPS Serial NMEA Driver
 server 127.127.28.0 minpoll 4 maxpoll 4 iburst prefer
-fudge 127.127.28.0 flag1 1 time1 0.250 refid GPS stratum 1
+fudge 127.127.28.0 flag1 1 time1 0.220 refid GPS stratum 1
 
 # Shared Host Memory 2 source
 server 127.127.28.2 minpoll 4 maxpoll 4
