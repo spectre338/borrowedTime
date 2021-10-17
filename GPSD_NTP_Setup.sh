@@ -16,8 +16,10 @@
 #*******************************************************
 apt update && apt upgrade -y
 #*******************************************************
-# APT Install GPS PPS and NTP
+# APT Install GPS PPS and NTP & Enable SSH and Serial
 #*******************************************************
+raspi-config nonint do_ssh
+raspi-config nonint do_serial 2
 apt install gpsd gpsd-clients pps-tools ntp -y
 #*******************************************************
 # Alter gpsd
