@@ -1,6 +1,5 @@
 sudo apt-get install -y hostapd dnsmasq
 
-sudo systemctl stop hostapd
 sudo systemctl stop dnsmasq
 
 sudo cp hostapd.conf /etc/hostapd/hostapd.conf
