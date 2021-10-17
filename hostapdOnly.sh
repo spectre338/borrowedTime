@@ -55,3 +55,10 @@ WantedBy=multi-user.target
 " | sudo tee -a  /etc/systemd/system/hs-iptables.service
 
 sudo systemctl enable hs-iptables
+
+echo "
+172.16.0.1		0.debian.pool.ntp.org
+172.16.0.1              2.debian.pool.ntp.org
+172.16.0.1              2.debian.pool.ntp.org
+172.16.0.1              3.debian.pool.ntp.org
+" | sudo tee -a  /etc/hosts
