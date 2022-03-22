@@ -94,7 +94,7 @@ echo "Update hosts to send client NTP without changing any settings"
 #*******************************************************
 echo "
 172.16.0.1              0.debian.pool.ntp.org
-172.16.0.1              2.debian.pool.ntp.org
+172.16.0.1              1.debian.pool.ntp.org
 172.16.0.1              2.debian.pool.ntp.org
 172.16.0.1              3.debian.pool.ntp.org
 " | sudo tee -a  /etc/hosts
